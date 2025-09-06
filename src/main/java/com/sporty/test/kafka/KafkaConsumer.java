@@ -23,7 +23,7 @@ public class KafkaConsumer {
     )
     public void consumeRecord(final ConsumerRecord<String, BetDto> record) {
         final BetDto betDto = record.value();
-        log.info("[1] Received record on {}-{}: {}={}", record.partition(), record.offset(), record.key(), record.value());
+        log.info("[1] Received record on {}: {}={}", record.offset(), record.key(), record.value());
         log.info("Bet with id {}", betDto.getBetId());
         jackpotService.getJackpot(betDto)
                 .ifPresent(jackpot -> jackpotContributionService.calculateContribution(jackpot, betDto));
